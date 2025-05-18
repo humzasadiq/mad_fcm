@@ -3,7 +3,7 @@
 A Flutter application demonstrating Firebase Cloud Messaging integration for push notifications with custom notification handling.
 
 ## Demo Video  
-[Link]([https://console.firebase.google.com/](https://drive.google.com/file/d/19ONF5ZFBC9_hwxzRL4czzGC7UHCWgLAa/view?usp=sharing))
+[Link](https://drive.google.com/file/d/19ONF5ZFBC9_hwxzRL4czzGC7UHCWgLAa/view?usp=sharing)
 ## Setup Instructions  
 
 ### 1. Firebase Integration
