@@ -2,14 +2,6 @@
 
 A Flutter application demonstrating Firebase Cloud Messaging integration for push notifications with custom notification handling.
 
-## Features
-
-- FCM integration
-- Foreground/background notifications
-- Test notification demo
-- Custom notification icons based on message content
-- Topic-based subscriptions
-
 ## Setup Instructions
 
 ### 1. Firebase Integration
@@ -17,11 +9,10 @@ A Flutter application demonstrating Firebase Cloud Messaging integration for pus
 1. **Create a Firebase Project**:
    - Go to [Firebase Console](https://console.firebase.google.com/)
    - Create a new project or use an existing one
-   - Register your app (Android/iOS) with Firebase
+   - Register your app (Android) with Firebase
 
 2. **Download Configuration Files**:
    - For Android: Download `google-services.json` and place it in `android/app/`
-   - For iOS: Download `GoogleService-Info.plist` and place it in `ios/Runner/`
 
 3. **Update Android Configuration**:
    - Ensure the `com.google.gms.google-services` plugin is applied in your app-level `build.gradle.kts`
@@ -41,7 +32,7 @@ To send push notifications, you'll need to:
    - Generate new private key
    - Save the JSON file as `gcloud.json` in your project root
 
-2. **Authenticate with Google Cloud**:
+2. **Authenticate with Google Cloud Console SDK Shell**:
    ```bash
    gcloud auth activate-service-account --key-file=<your-path-to>/mad_fcm/gcloud.json
    ```
@@ -114,8 +105,3 @@ To test the special warning notification, include "CAUTION" in the notification 
 
 - **UNREGISTERED Error**: If you receive an "UNREGISTERED" error, it means the FCM token is no longer valid. Run the app again to get a new token.
 - **Authentication Errors**: If you receive a 401 error, your access token has likely expired. Generate a new one.
-- **Missing Icons**: Ensure all notification icons are properly placed in the resource directories.
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
