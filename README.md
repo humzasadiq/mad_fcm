@@ -1,19 +1,121 @@
-# mad_fcm
+# Firebase Cloud Messaging (FCM) Demo
 
-A new Flutter project.
+A Flutter application demonstrating Firebase Cloud Messaging integration for push notifications with custom notification handling.
 
-## Getting Started
+## Features
 
-This project is a starting point for a Flutter application.
+- FCM integration
+- Foreground/background notifications
+- Test notification demo
+- Custom notification icons based on message content
+- Topic-based subscriptions
 
-A few resources to get you started if this is your first Flutter project:
+## Setup Instructions
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+### 1. Firebase Integration
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+1. **Create a Firebase Project**:
+   - Go to [Firebase Console](https://console.firebase.google.com/)
+   - Create a new project or use an existing one
+   - Register your app (Android/iOS) with Firebase
 
-gcloud auth activate-service-account --key-file=D:\MAD\flutter\mad_fcm\gcloud.json
-gcloud auth print-access-token
+2. **Download Configuration Files**:
+   - For Android: Download `google-services.json` and place it in `android/app/`
+   - For iOS: Download `GoogleService-Info.plist` and place it in `ios/Runner/`
+
+3. **Update Android Configuration**:
+   - Ensure the `com.google.gms.google-services` plugin is applied in your app-level `build.gradle.kts`
+   - Verify Firebase dependencies are added
+
+4. **Run the App**:
+   - Execute `flutter run` to build and run the app
+   - The app will generate and print a unique FCM token to the console
+   - Copy this token for sending test notifications
+
+### 2. Sending Push Notifications via REST API
+
+To send push notifications, you'll need to:
+
+1. **Generate Service Account Key**:
+   - Go to Firebase Console > Project Settings > Service accounts
+   - Generate new private key
+   - Save the JSON file as `gcloud.json` in your project root
+
+2. **Authenticate with Google Cloud**:
+   ```bash
+   gcloud auth activate-service-account --key-file=<your-path-to>/mad_fcm/gcloud.json
+   ```
+
+3. **Get Access Token**:
+   ```bash
+   gcloud auth print-access-token
+   ```
+   
+4. **Send POST Request to FCM**:
+   - Endpoint: `https://fcm.googleapis.com/v1/projects/flutter-fcm-79d4d/messages:send`
+   - Headers:
+     ```
+     Accept: */*
+     User-Agent: Thunder Client (https://www.thunderclient.com)
+     Content-Type: application/json
+     Authorization: Bearer <Access Token from the previous step>
+     ```
+   - Body:
+     ```json
+     {
+       "message": {
+         "token": "<DEVICE_TOKEN>",
+         "notification": {
+           "title": "Test Title",
+           "body": "Test Message"
+         },
+         "data": {
+           "redirect": "product",
+           "message": "Test data"
+         }
+       }
+     }
+     ```
+
+   > **Note**: Replace `<DEVICE_TOKEN>` with the FCM token printed in the console when running the app. This token will be different for every new build/compile.
+
+### 3. Testing Special Notifications
+
+To test the special warning notification, include "CAUTION" in the notification body:
+
+```json
+{
+  "message": {
+    "token": "<DEVICE_TOKEN>",
+    "notification": {
+      "title": "CAUTION",
+      "body": "CAUTION: This is a warning message!"
+    },
+    "data": {
+      "redirect": "product",
+      "message": "CAUTION"
+    }
+  }
+}
+```
+
+## Important Notes
+
+1. The FCM token is unique to each device and app installation. It may change if:
+   - The app is reinstalled
+   - The user clears app data
+   - The token is automatically refreshed by Firebase
+
+2. The access token from gcloud is temporary and will expire. You'll need to run the `gcloud auth print-access-token` command again to get a new token when it expires.
+
+3. After first login with `gcloud auth activate-service-account`, you typically won't need to reference the JSON file again unless you're switching accounts or credentials.
+
+## Troubleshooting
+
+- **UNREGISTERED Error**: If you receive an "UNREGISTERED" error, it means the FCM token is no longer valid. Run the app again to get a new token.
+- **Authentication Errors**: If you receive a 401 error, your access token has likely expired. Generate a new one.
+- **Missing Icons**: Ensure all notification icons are properly placed in the resource directories.
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
