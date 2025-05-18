@@ -92,12 +92,9 @@ To test the special warning notification, include "CAUTION" in the notification 
 
 ## Important Notes
 
-1. The FCM token is unique to each device and app installation. It may change if:
-   - The app is reinstalled
-   - The user clears app data
-   - The token is automatically refreshed by Firebase
+1. The FCM token is unique to each app compile
 
-2. The access token from gcloud is temporary and will expire. You'll need to run the `gcloud auth print-access-token` command again to get a new token when it expires.
+2. The access token from gcloud is temporary (usually 1 hour) and will expire. You'll need to run the `gcloud auth print-access-token` command again to get a new token when it expires.
 
 3. After first login with `gcloud auth activate-service-account`, you typically won't need to reference the JSON file again unless you're switching accounts or credentials.
 
