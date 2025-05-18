@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "3040080209",
+    "project_id": "flutter-fcm-79d4d",
+    "storage_bucket": "flutter-fcm-79d4d.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:3040080209:android:6fe0f3495f754c62a5a370",
+        "android_client_info": {
+          "package_name": "com.example.mad_fcm"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBPrc_kJPV0KjwrA2sRKfiOutMjjiGXVCA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
